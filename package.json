@@ -1,0 +1,23 @@
+{
+  "start": "node index.js",
+  "name": "reconocimiento-facial",
+  "version": "0.0.1",
+  "description": "Aplicación en NodeJS para reconocer caras de personas expuestas a la webcam del ordenador desde el que se acceda",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@MS-DIEZ",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "jimp": "^0.8.4",
+    "mysql": "^2.17.1",
+    "njs": "0.0.2",
+    "node-webcam": "*",
+    "socket.io": "^2.3.0"
+  }
+}

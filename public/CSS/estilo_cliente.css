@@ -1,0 +1,32 @@
+#contenedor{
+  position: relative;
+}
+#canvas{
+  position: absolute;
+  align-content: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  right: 25%;
+  top: 0;
+}
+
+video{
+  position: relative;
+}
+
+#informacion{
+  color: red;
+  font-size: 150%;
+}
+
+#button_photo{
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  padding-bottom: 20px;
+  padding-top: 20px;
+
+}

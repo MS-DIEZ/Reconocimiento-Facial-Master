@@ -1,0 +1,23 @@
+button{
+	height: 20%;
+	width: 30%;
+	font-size: 300%;
+}
+
+#button_acceso{
+	margin-right: 10%;
+	margin-top: 15%;
+	margin-bottom: 15%;
+}
+
+#button_alta{
+	margin-left: 10%;
+	margin-top: 15%;
+	margin-bottom: 15%;
+}
+
+footer{
+	bottom: 0;
+	position: absolute;
+	width: 100%;
+}
