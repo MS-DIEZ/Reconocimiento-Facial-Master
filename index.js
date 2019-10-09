@@ -12,26 +12,11 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const path = require('path');
-//const NodeWebcam = require("node-webcam");
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const base64ToImage = require('base64-to-image');
 const Jimp = require('jimp');
 
-
-
-var opts = {
-    width: 1280,
-    height: 720,
-    quality: 100,
-    delay: 3,
-    location: '/public/JavaScript/DevImages/',
-    saveShots: true,
-    output: "jpeg",
-    verbose: false, 
-};
-
-const Webcam = NodeWebcam.create(opts);
 const connection = mysql.createConnection({
     host: 'remotemysql.com',
     user: 'dFup9BYSx2',
