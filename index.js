@@ -16,7 +16,8 @@ const connection = mysql.createConnection({
     host: 'remotemysql.com',
     user: 'dFup9BYSx2',
     password: 'P1hNpGNTfn',
-    database: 'dFup9BYSx2'
+    database: 'dFup9BYSx2',
+    multipleStatements: true
 });
 
 connection.connect(function(error){
@@ -51,7 +52,7 @@ function execute_select(){
 
    return new Promise(function(resolve, reject) 
    {
-        connection.query('SELECT * FROM Usuarios', function(error, result){
+        connection.query('SELECT * FROM USUARIOS_INFO', function(error, result){
             if(error)
             {
                 reject(error);
@@ -77,7 +78,6 @@ app.get('/', function(request, response){
 
 app.get('/principal', function(request, response) {
     
-    console.log("Redireccion /")
     var select_promise = execute_select();
 
     select_promise.then(function(result){
@@ -155,7 +155,13 @@ app.post('/take_photo', function(request, response) {
         base64Str = ""+request.body.value_3
         base64ToImage(base64Str,path,optionalObj)
 
-        connection.query('INSERT INTO Usuarios (Nombre) VALUES ('+(numero_usuarios+1)+')', function(error, result){
+
+        var nombre = String(request.body.value_nombre);
+        var apellido = String(request.body.value_apellido);
+        var direccion = String(request.body.value_direccion);
+        var DNI = String(request.body.value_dni);
+
+        connection.query("INSERT INTO USUARIOS_INFO (Nombre, Apellido, Direccion, DNI) VALUES ('"+nombre+"', '"+apellido+"','"+direccion+"','"+DNI+"')", function(error, result){
             if(error)
             {
                 throw error;
