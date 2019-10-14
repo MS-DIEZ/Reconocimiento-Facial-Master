@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<html>
+
+<head>
+  <title>Página principal</title>
+  <!--<script type="text/javascript" src="JavaScript/JavaScript-Style/script_style_client.js"></script>-->
+  <script type="text/javascript" src="JavaScript/script_sign_up_form.js"></script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link type="text/css" rel="stylesheet" href="CSS/estilo_principal.css">
+  <link type="text/css" rel="stylesheet" href="CSS/estilo_form_sign_up.css">
+
+</head>
+
+<body>
+
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+  <div class="w3-center">
+  <h1 class="w3-xxxlarge w3-animate-bottom">Registro de usuario</h1>
+  </div>
+</header>
+
+<div class="w3-row-padding w3-center w3-margin-top">
+    <div id="contenedor" class="w3-all">
+        <div class="w3-card w3-container" style="min-height:460">
+        <video id="video" width="720" height="460" autoplay muted></video>
+        </div>
+        <div id="canvas">
+        </div>
+    </div>
+    <button id="button_photo" onclick="take_photo()">Sacar fotografia</button>
+</div>
+
+
+
+
+<div id="formulario" class="w3-row-padding w3-center w3-margin-top">
+    <form  onsubmit="return false">
+        <div class="container">
+            <h1>Complete la siguiente información</h1>
+           
+            <hr>
+        
+            <label for="nombre"><b>Nombre</b></label>
+            <input id="nombre" type="text" placeholder="Introduzca su nombre" name="nombre" required>
+        
+            <label for="apellido"><b>Apellido</b></label>
+            <input id="apellido" type="text" placeholder="Introduzca su apellido" name="apellido" required>
+
+            <label for="dni"><b>NIF/DNI</b></label>
+            <input id="dni" type="text" placeholder="Introduzca su DNI" name="dni" required>
+        
+            <label for="direccion"><b>Direccion</b></label>
+            <input id="direccion" type="text" placeholder="Introduzca su direccion" name="direccion" required>
+            <hr>
+            <button onclick="submit_function()" type="submit" class="registerbtn">Registrarse</button>
+        </div>
+        
+    </form>
+
+</div>
+
+<footer class="w3-container w3-theme-dark w3-padding-16">
+  <h3>Sistema de reconocimiento facial</h3>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-theme-light w3-padding">Go To Top</span>    
+    <a class="w3-text-white" href="#myHeader"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+</footer>
+
+</body>
+</html>

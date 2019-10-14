@@ -195,16 +195,15 @@ const parseObjectFromCookie = (cookie) => {
 
 window.onload = function(){
 
-  let dataCookie = getCookie('data');
+  var dataCookie = getCookie('data');
   var data;
 
   deleteCookie('data');
   if (dataCookie) {
     data = parseObjectFromCookie(dataCookie);
-    // work with data. `data` is equal to `visitCard` from the server
-
+    console.log(data)
   } else {
-    // handle data not found
+    throw error;
   }
 
 
@@ -222,6 +221,7 @@ window.onload = function(){
   
   intervalo_ejecucion = setInterval(async () => {
     
+    console.log(data)
     if(flag_prueba == 0){
       labeledFaceDescriptors = await loadLabeledImages(data)
       flag_prueba = 1;

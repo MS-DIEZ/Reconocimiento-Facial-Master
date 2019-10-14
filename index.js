@@ -116,7 +116,8 @@ app.get('/detallado', function(request, response) {
 
 app.get('/sign_up', function(request, response) {
 
-    response.sendFile(__dirname + '/public/sign_up.html');
+    //response.sendFile(__dirname + '/public/sign_up.html');
+    response.sendFile(__dirname + '/public/sign_up_form.html');
 });
 
 app.get('/error', function(request, response) {
@@ -232,12 +233,15 @@ app.post('/take_photo', function(request, response) {
 
         fs.unlink(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+3+'.png', (err) => {
           if (err) throw err;
-          console.log(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+3+'.png was deleted');        });
+          console.log(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+3+'.png was deleted');        
+        });
 
 
 
+        /*
         var select_promise = execute_select();
-
+        
+        
         select_promise.then(function(result){
             identificadores = [];
             for(var i=0; i<result.length; i++){
@@ -245,10 +249,16 @@ app.post('/take_photo', function(request, response) {
             }
 
             response.cookie('data', JSON.stringify(identificadores));
-            //response.redirect('/');
-            //response.render(__dirname + "/public/client.html");
+            response.redirect('/callback');
         })
-        //response.redirect('/');
+        */
+       
+        identificadores.push(""+(identificadores.length+1));
+
+        response.cookie('data', JSON.stringify(identificadores));
+        response.redirect('/')
+        //response.render(__dirname + "/public/client.html");
+        
     })
 });
 

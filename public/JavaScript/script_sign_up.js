@@ -60,11 +60,7 @@ function shoot(){
     console.log(snapshots)
 
     output.appendChild(snapshots[0]);
-    /*
-    for(var i=0; i<4; i++){
-        output.appendChild(snapshots[i]);
-    }
-    */
+    
 	var dataURL = canvas.toDataURL();
 	console.log(dataURL)
 
