@@ -220,38 +220,6 @@ app.post('/take_photo', function(request, response) {
         jimp_promise.then(function(result){
             console.log("Convirtiendo imagen 3")
         });
-        /*
-        Jimp.read(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+1+'.png', (err, imagen) => {
-            if (err) throw err;
-
-            imagen
-            .resize(1280, 720) // resize
-            .quality(60) // set JPEG quality
-            .write(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+1+".jpg"); // save
-        });
-        
-
-        Jimp.read(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+2+'.png', (err, imagen) => {
-            if (err) throw err;
-
-            imagen
-            .resize(1280, 720) // resize
-            .quality(60) // set JPEG quality
-            .write(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+2+".jpg"); // save
-        });
-
-
-        Jimp.read(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+3+'.png', (err, imagen) => {
-            if (err) throw err;
-
-            imagen
-            .resize(1280, 720) // resize
-            .quality(60) // set JPEG quality
-            .write(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+3+".jpg"); // save
-        });
-
-        */
-
 
 
         connection.query('INSERT INTO Usuarios (Nombre) VALUES ('+(numero_usuarios+1)+')', function(error, result){
@@ -261,22 +229,20 @@ app.post('/take_photo', function(request, response) {
             }
         });
 
-        /*
-        fs.unlink(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+1+'.png', (err) => {
-          if (err) throw err;
-          console.log(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+1+'.png was deleted');
+
+        fs.readdir(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1), function (err, files) {
+        //handling error
+        if (err) {
+            return console.log('Unable to scan directory: ' + err);
+        } 
+        //listing all files using forEach
+        files.forEach(function (file) {
+            // Do whatever you want to do with the file
+            console.log(file); 
+        });
         });
 
-        fs.unlink(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+2+'.png', (err) => {
-          if (err) throw err;
-          console.log(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+2+'.png was deleted');
-        });
 
-        fs.unlink(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+3+'.png', (err) => {
-          if (err) throw err;
-          console.log(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+3+'.png was deleted');        
-        });
-        */
        
         identificadores.push(""+(identificadores.length+1));
 
