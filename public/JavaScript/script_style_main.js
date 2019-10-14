@@ -1,14 +1,14 @@
 function alta(){
 
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/", true);
+  xhr.open("GET", "/sign_up", true);
   xhr.setRequestHeader('Content-Type', 'application/json');
-  window.location = '/';
+  window.location = '/sign_up';
 }
 
 function acceso(){
   var xhr = new XMLHttpRequest();
-  xhr.open("GET", "/", true);
+  xhr.open("GET", "/principal", true);
   xhr.setRequestHeader('Content-Type', 'application/json');
-  window.location = '/';
+  window.location = '/principal';
 }

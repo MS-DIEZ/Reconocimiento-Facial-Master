@@ -1,11 +1,6 @@
 var resultado;
 var identificadores = [];
 var numero_usuarios;
-var tiempo_total;
-
-var timer_activo = 0;
-var timer_contador = 0;
-var tiempo_total = 3;
 
 const port = 3000;
 const express = require('express');
@@ -33,10 +28,8 @@ connection.connect(function(error){
     }
 });
 
-
 function count_folders(){
     //Contamos el numero de directorios que hay en la carpeta DevImages
-
     console.log("Contando directorios");
     return new Promise(function(resolve, reject) 
     {
@@ -71,41 +64,18 @@ function execute_select(){
    }) 
 }
 
-function execute_jimp(id){
-
-    return new Promise(function(resolve, reject){
-        Jimp.read(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+'.png', (err, imagen) => {
-            if(err){
-                reject(err);
-            }else{
-                imagen
-                .resize(1280, 720) // resize
-                .quality(60) // set JPEG quality
-                .write(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+".jpg"); // save
-
-
-                fs.unlink(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+'.png', (err) => {
-                    if (err) throw err;
-                    console.log(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+'.png was deleted');
-                });
-
-                resolve();
-            }
-
-            
-        });
-    })
-}
-
 app.use(express.static(path.join(__dirname, 'public')));
-//app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json({ limit: '50mb' }));
+
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 50000 }));
-//app.use(bodyParser.json())
 app.engine('html', require('ejs').renderFile);
 
 
-app.get('/', function(request, response) {
+app.get('/', function(request, response){
+    response.render(__dirname + "/public/main.html");
+})
+
+app.get('/principal', function(request, response) {
     
     console.log("Redireccion /")
     var select_promise = execute_select();
@@ -141,15 +111,11 @@ app.get('/detallado', function(request, response) {
 
 
 app.get('/sign_up', function(request, response) {
-
-    //response.sendFile(__dirname + '/public/sign_up.html');
     response.sendFile(__dirname + '/public/sign_up_form.html');
 });
 
 app.get('/error', function(request, response) {
-
     response.sendFile(__dirname + '/public/error.html');
-    //response.redirect('redireccion.html');
 });
 
 app.get('/callback', function(request, response){
@@ -189,52 +155,18 @@ app.post('/take_photo', function(request, response) {
         base64Str = ""+request.body.value_3
         base64ToImage(base64Str,path,optionalObj)
 
-        
-        /*
-        var jimp_promise = execute_jimp(1);
-        jimp_promise.then(function(result){
-            console.log("Convirtiendo imagen 1")
-        });
-
-        
-        jimp_promise = execute_jimp(2);
-        jimp_promise.then(function(result){
-            console.log("Convirtiendo imagen 2")
-        });
-
-        
-        jimp_promise = execute_jimp(3);
-        jimp_promise.then(function(result){
-            console.log("Convirtiendo imagen 3")
-        });
-
-        */
-
         connection.query('INSERT INTO Usuarios (Nombre) VALUES ('+(numero_usuarios+1)+')', function(error, result){
             if(error)
             {
-            throw error;
+                throw error;
             }
         });
 
-
-        fs.readdir(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1), function (err, files) {
-        //handling error
-        if (err) {
-            return console.log('Unable to scan directory: ' + err);
-        } 
-
-
-       
         identificadores.push(""+(identificadores.length+1));
-
         response.cookie('data', JSON.stringify(identificadores));
-        response.redirect('/')
-        //response.render(__dirname + "/public/client.html");
-    })
-});
+        response.redirect('/principal')
+    });
 })
-
 
 process.on('SIGINT', function () {
     console.log('Servicio interrumpido');
