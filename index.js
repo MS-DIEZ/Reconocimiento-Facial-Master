@@ -71,6 +71,25 @@ function execute_select(){
    }) 
 }
 
+function execute_jimp(id){
+
+    return new Promise(function(resolve, reject){
+        Jimp.read(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+'.png', (err, imagen) => {
+            if(err){
+                reject(error);
+            }else{
+                imagen
+                .resize(1280, 720) // resize
+                .quality(60) // set JPEG quality
+                .write(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+".jpg"); // save
+                resolve();
+            }
+
+            
+        });
+    })
+}
+
 app.use(express.static(path.join(__dirname, 'public')));
 //app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -142,9 +161,6 @@ app.post('/take_photo', function(request, response) {
     
     count_promise.then(function(result){
 
-       var select_promise;
-       var webcam_promise;
-
        numero_usuarios = result;
        console.log("Numero en usuarios: "+numero_usuarios);
        console.log("Numero en resultados: "+result);
@@ -180,9 +196,24 @@ app.post('/take_photo', function(request, response) {
         base64ToImage(base64Str,path,optionalObj)
 
         
+        console.log("Convirtiendo imagen 1")
+        var jimp_promise = execute_jimp(1);
+        jimp_promise.then(function(result){
+
+        });
         
+        console.log("Convirtiendo imagen 2")
+        var jimp_promise = execute_jimp(2);
+        jimp_promise.then(function(result){
 
+        });
 
+        console.log("Convirtiendo imagen 3")
+        var jimp_promise = execute_jimp(3);
+        jimp_promise.then(function(result){
+
+        });
+        /*
         Jimp.read(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+1+'.png', (err, imagen) => {
             if (err) throw err;
 
@@ -191,6 +222,7 @@ app.post('/take_photo', function(request, response) {
             .quality(60) // set JPEG quality
             .write(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+1+".jpg"); // save
         });
+        
 
         Jimp.read(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+2+'.png', (err, imagen) => {
             if (err) throw err;
@@ -210,6 +242,8 @@ app.post('/take_photo', function(request, response) {
             .quality(60) // set JPEG quality
             .write(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+3+".jpg"); // save
         });
+
+        */
 
 
 
