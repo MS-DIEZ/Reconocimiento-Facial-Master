@@ -172,38 +172,25 @@ app.post('/take_photo', function(request, response) {
        console.log("Numero en usuarios: "+numero_usuarios);
        console.log("Numero en resultados: "+result);
 
-       try{
-
-        if (fs.existsSync(__dirname+'/'+'1.jpg')) {
-
-            fs.unlinkSync(__dirname+'/'+'1.jpg');
-            fs.unlinkSync(__dirname+'/'+'2.jpg');
-            fs.unlinkSync(__dirname+'/'+'3.jpg');
-        }
-        } catch(err){
-            console.error("No existen los ficheros")
-        }
-
         fs.mkdirSync(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1));
 
         
-
         var base64Str = ""+request.body.value_1;
         var path = __dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/';
 
-        var optionalObj = {'fileName': '1', 'type':'png'};
+        var optionalObj = {'fileName': '1', 'type':'jpg'};
         base64ToImage(base64Str,path,optionalObj)
 
-        optionalObj = {'fileName': '2', 'type':'png'};
+        optionalObj = {'fileName': '2', 'type':'jpg'};
         base64Str = ""+request.body.value_2
         base64ToImage(base64Str,path,optionalObj)
 
-        optionalObj = {'fileName': '3', 'type':'png'};
+        optionalObj = {'fileName': '3', 'type':'jpg'};
         base64Str = ""+request.body.value_3
         base64ToImage(base64Str,path,optionalObj)
 
         
-        
+        /*
         var jimp_promise = execute_jimp(1);
         jimp_promise.then(function(result){
             console.log("Convirtiendo imagen 1")
@@ -221,6 +208,7 @@ app.post('/take_photo', function(request, response) {
             console.log("Convirtiendo imagen 3")
         });
 
+        */
 
         connection.query('INSERT INTO Usuarios (Nombre) VALUES ('+(numero_usuarios+1)+')', function(error, result){
             if(error)
@@ -235,12 +223,6 @@ app.post('/take_photo', function(request, response) {
         if (err) {
             return console.log('Unable to scan directory: ' + err);
         } 
-        //listing all files using forEach
-        files.forEach(function (file) {
-            // Do whatever you want to do with the file
-            console.log(file); 
-        });
-        });
 
 
        
@@ -249,9 +231,10 @@ app.post('/take_photo', function(request, response) {
         response.cookie('data', JSON.stringify(identificadores));
         response.redirect('/')
         //response.render(__dirname + "/public/client.html");
-        
     })
 });
+})
+
 
 process.on('SIGINT', function () {
     console.log('Servicio interrumpido');
