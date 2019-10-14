@@ -99,6 +99,9 @@ app.get('/principal', function(request, response) {
 
 app.post('/redireccion', function(request, response){
     console.log('Post realizado, llamando a detallado...');
+    console.log((request.body.value))
+
+    console.log((resultado[parseInt(request.body.value)-1]))
     response.cookie('data', JSON.stringify(resultado[parseInt(request.body.value)-1]))
     response.redirect('/detallado');
 });
