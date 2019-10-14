@@ -76,12 +76,19 @@ function execute_jimp(id){
     return new Promise(function(resolve, reject){
         Jimp.read(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+'.png', (err, imagen) => {
             if(err){
-                reject(error);
+                reject(err);
             }else{
                 imagen
                 .resize(1280, 720) // resize
                 .quality(60) // set JPEG quality
                 .write(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+".jpg"); // save
+
+
+                fs.unlink(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+'.png', (err) => {
+                    if (err) throw err;
+                    console.log(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+id+'.png was deleted');
+                });
+
                 resolve();
             }
 
@@ -196,22 +203,22 @@ app.post('/take_photo', function(request, response) {
         base64ToImage(base64Str,path,optionalObj)
 
         
-        console.log("Convirtiendo imagen 1")
+        
         var jimp_promise = execute_jimp(1);
         jimp_promise.then(function(result){
-
+            console.log("Convirtiendo imagen 1")
         });
+
         
-        console.log("Convirtiendo imagen 2")
-        var jimp_promise = execute_jimp(2);
+        jimp_promise = execute_jimp(2);
         jimp_promise.then(function(result){
-
+            console.log("Convirtiendo imagen 2")
         });
 
-        console.log("Convirtiendo imagen 3")
-        var jimp_promise = execute_jimp(3);
+        
+        jimp_promise = execute_jimp(3);
         jimp_promise.then(function(result){
-
+            console.log("Convirtiendo imagen 3")
         });
         /*
         Jimp.read(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+1+'.png', (err, imagen) => {
@@ -254,7 +261,7 @@ app.post('/take_photo', function(request, response) {
             }
         });
 
-
+        /*
         fs.unlink(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+1+'.png', (err) => {
           if (err) throw err;
           console.log(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+1+'.png was deleted');
@@ -269,22 +276,6 @@ app.post('/take_photo', function(request, response) {
           if (err) throw err;
           console.log(__dirname+'/public/JavaScript/DevImages/'+(numero_usuarios+1)+'/'+3+'.png was deleted');        
         });
-
-
-
-        /*
-        var select_promise = execute_select();
-        
-        
-        select_promise.then(function(result){
-            identificadores = [];
-            for(var i=0; i<result.length; i++){
-                identificadores.push(""+result[i].Identificador);
-            }
-
-            response.cookie('data', JSON.stringify(identificadores));
-            response.redirect('/callback');
-        })
         */
        
         identificadores.push(""+(identificadores.length+1));

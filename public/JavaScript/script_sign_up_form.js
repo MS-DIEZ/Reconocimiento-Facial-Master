@@ -58,10 +58,8 @@ function submit_function(){
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.withCredentials = true;
 
-       // xhr.onload = () => xhr.open("GET", "/", true) xhr.send()
         xhr.onload = function () {
             // Do something with the retrieved data ( found in xmlhttp.response )
-            
             window.location = "/"
         };
 
