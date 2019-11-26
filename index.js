@@ -14,9 +14,9 @@ const Jimp = require('jimp');
 
 const connection = mysql.createConnection({
     host: 'remotemysql.com',
-    user: 'dFup9BYSx2',
-    password: 'P1hNpGNTfn',
-    database: 'dFup9BYSx2',
+    user: 'hMfDDe70eC',
+    password: 'FupPCucZmG',
+    database: 'hMfDDe70eC',
     multipleStatements: true
 });
 
